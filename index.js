@@ -96,7 +96,7 @@ async function run(suite, {renderer} = {}) {
         
         /** @TODO Make sure we can access error.stack, message, actual, etc correctly on this */
         /** @TODO this will currently only work with uvu/assert, because the assert error has an `.expects` property */
-        testResult.error = {...err, expected: err.expects};
+        testResult.error = {...err, expected: err?.expects, message: err.message};
       } finally {
         testSuiteResult.total++;
         renderer?.renderTest?.(testResult);
