@@ -35,23 +35,16 @@ function setup(options) {
   return { suite, it, before, beforeEach, after, afterEach };
 }
 
-function createDescribe() {
-  /** @type {Describe} describe */
-  const describe = (name, handler) => {
-    const {suite, it, before, beforeEach, after, afterEach } = setup({name});
-    QUEUE.push(suite);
-    handler({it, describe, before, beforeEach, after, afterEach});
-  }
-  describe.only = (name, handler) => { 
-    const {suite, it, before, beforeEach, after, afterEach } = setup({name, suiteOnly: true});
-    QUEUE.push(suite);
-    handler({it, describe, before, beforeEach, after, afterEach});  
-  };
-
-  return describe;
+function createDescribe(name, handler, options = {}) {
+  const {suite, it, before, beforeEach, after, afterEach } = setup({name, ...options});
+  QUEUE.push(suite);
+  handler({it, describe, before, beforeEach, after, afterEach});
 }
 
-export const describe = createDescribe();
+/** @type {Describe} describe */
+export const describe = (name, handler) => createDescribe(name, handler);
+describe.only = (name, handler) => createDescribe(name, handler, {suiteOnly: true})
+/** @TODO .skip */
 
 /**
  * Runs the given tests in a suite, and its lifecycle hooks like before, beforeEach, after, afterEach

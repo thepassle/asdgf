@@ -18,5 +18,9 @@ describe('bla', ({it}) => {
   it.only('bla two', () => {console.log('bla two run')});
 });
 
+describe('huehueheuhe', ({it}) => {
+  it('foo', () =>{});
+});
+
 executeTests().then(console.log);
 
