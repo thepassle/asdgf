@@ -2,7 +2,7 @@
 
 > A stupid simple way to test
 
-No magic, no globals, no nonsense.
+No magic, no nonsense.
 
 ## Demo
 
@@ -29,7 +29,7 @@ executeTests().then(console.log);
 
 ## Renderer
 
-You can provide a custom renderer to render logic to the browser, or log progress to the console.
+You can provide a custom renderer to render progress in the browser, or log progress to the console.
 
 ```js
 

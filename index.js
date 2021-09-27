@@ -1,5 +1,5 @@
 const timer = (now = Date.now()) => () => (Date.now() - now).toFixed(2) + 'ms';
-const QUEUE = [];
+globalThis.QUEUE = [];
 
 /**
  * @typedef {import('./types').Renderer} Renderer
