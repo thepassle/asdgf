@@ -38,7 +38,7 @@ function setup(options) {
 function createDescribe(name, handler, options = {}) {
   const {suite, it, before, beforeEach, after, afterEach } = setup({name, ...options});
   QUEUE.push(suite);
-  handler({it, describe, before, beforeEach, after, afterEach});
+  handler({it, before, beforeEach, after, afterEach});
 }
 
 /** @type {Describe} describe */

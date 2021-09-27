@@ -1,6 +1,6 @@
 import { describe, executeTests } from '../index.js';
 
-describe('foo', ({it, before, describe, after}) => {
+describe('foo', ({it, before, after}) => {
   before(() => {console.log('before')});
   after(() => {console.log('after')});
 

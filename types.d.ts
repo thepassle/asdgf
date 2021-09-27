@@ -21,7 +21,6 @@ export interface It {
 
 export interface Tools {
   it: It,
-  describe: Describe,
   before: Hook,
   beforeEach: Hook,
   after: Hook,
