@@ -27,6 +27,22 @@ describe('sum', ({it, before, /* beforeEach, after, afterEach */}) => {
 executeTests().then(console.log);
 ```
 
+You can also nest suites:
+```js
+describe('foo', ({it, /* before, beforeEach, after, afterEach */}) => {
+  it('does foo', () => {
+    expect(true).to.equal(true);
+  });
+
+  /** Make sure to destructure `it` from the suite */
+  describe('bar', ({it}) => {
+    it('does bar', () => {
+      expect(true).to.equal(true);
+    });
+  });
+});
+```
+
 ## Renderer
 
 You can provide a custom renderer to render progress in the browser, or log progress to the console.
