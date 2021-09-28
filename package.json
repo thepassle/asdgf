@@ -5,7 +5,9 @@
   "main": "index.js",
   "module": "index.js",
   "scripts": {
-    "build": "esbuild index.js --minify --outfile=asdgf.min.js"
+    "build": "esbuild index.js --minify --outfile=asdgf.min.js",
+    "build:wtr": "esbuild wtr/index.js --minify --outfile=wtr/index.min.js",
+    "prepublish": "npm run build && npm run build:wtr"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,8 @@
   "homepage": "https://github.com/thepassle/asdgf#readme",
   "devDependencies": {
     "esbuild": "^0.13.2"
+  },
+  "dependencies": {
+    "@web/test-runner-core": "^0.10.21"
   }
 }
