@@ -70,3 +70,16 @@ const renderer = {
 
 executeTests({renderer});
 ```
+
+## Usage with [@web/test-runner](https://www.npmjs.com/package/@web/test-runner)
+
+`web-test-runner.config.mjs`:
+```js
+export default {
+  /** 
+   * Point WTR to `asdgf` as the testFramework of choice 
+   * Make sure to use the minified version 🙃
+   */
+  testFramework: { path: 'asdgf/wtr/index.min.js' },
+};
+```
