@@ -1,6 +1,6 @@
 {
   "name": "asdgf",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A stupid simple way to test",
   "main": "index.js",
   "module": "index.js",
@@ -23,6 +23,14 @@
   "devDependencies": {
     "esbuild": "^0.13.2"
   },
+  "files": [
+    "ui/test-report.js",
+    "wtr/index.js",
+    "index.js",
+    "asdgf.min.js",
+    "wtr.js",
+    "types.d.ts"
+  ],
   "dependencies": {
     "@web/test-runner-core": "^0.10.21"
   }
