@@ -43,6 +43,30 @@ describe('foo', ({it, /* before, beforeEach, after, afterEach */}) => {
 });
 ```
 
+## Example with web components
+
+```js
+import { describe } from 'asdgf';
+import { expect, html } from '@open-wc/testing';
+import { fixture, fixtureCleanup } from '@open-wc/testing-helpers/pure';
+
+class MyEl extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `hello world`;
+  }
+}
+customElements.define('my-el', MyEl);
+
+describe('MyEl', ({it, afterEach}) => {
+  afterEach(fixtureCleanup);
+
+  it('renders', async () => {
+    const el = await fixture(html`<my-el></my-el>`);
+    expect(el.textContent).to.equal('hello world');
+  });
+});
+```
+
 ## Renderer
 
 You can provide a custom renderer to render progress in the browser, or log progress to the console.
@@ -102,3 +126,6 @@ export default {
   testFramework: { path: 'node_modules/asdgf/wtr.js' },
 };
 ```
+
+## Prior art
+This project was inspired by [uvu](https://github.com/lukeed/uvu). 
