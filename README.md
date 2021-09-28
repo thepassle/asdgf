@@ -94,8 +94,7 @@ executeTests({renderer});
 export default {
   /** 
    * Point WTR to `asdgf` as the testFramework of choice 
-   * Make sure to use the minified version 🙃
    */
-  testFramework: { path: 'asdgf/wtr/index.min.js' },
+  testFramework: { path: 'asdgf/wtr.js' },
 };
 ```

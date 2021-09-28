@@ -5,8 +5,8 @@
   "main": "index.js",
   "module": "index.js",
   "scripts": {
-    "build": "esbuild index.js --minify --outfile=asdgf.min.js",
-    "build:wtr": "esbuild wtr/index.js --minify --outfile=wtr/index.min.js",
+    "build": "esbuild index.js --minify --format=esm --outfile=asdgf.min.js",
+    "build:wtr": "esbuild wtr/index.js --bundle --external:@web/test-runner-core --format=esm --minify --outfile=wtr.js",
     "prepublish": "npm run build && npm run build:wtr"
   },
   "repository": {
