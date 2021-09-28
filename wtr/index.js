@@ -5,6 +5,7 @@ import {
   sessionFailed,
 } from '@web/test-runner-core/browser/session.js';
 import { executeTests } from '../index.js';
+import '../ui/test-report.js';
 
 (async () => {
   // notify the test runner that we're alive
@@ -27,14 +28,22 @@ import { executeTests } from '../index.js';
     const testResults = await executeTests({
       renderer: {
         suiteStart: ({name}) => {
+          /** log */
           console.log('\n' + name);
+
+          /** render */
+          const heading = document.createElement('h1');
+          heading.textContent = name;
+          document.body.appendChild(heading);
         },
         renderTest: (testResult) => {
+          /** log */
           console.log(`${testResult.passed ? '✅' : '❌'} ${testResult.name}`)
-          // @TODO create reporter component
-          // const report = document.createElement('test-report');
-          // report.testResult = testResult;
-          // document.body.appendChild(report);
+
+          /** render */
+          const report = document.createElement('test-report');
+          report.test = testResult;
+          document.body.appendChild(report);
         }
       }
     });
