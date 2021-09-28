@@ -1,6 +1,6 @@
 {
   "name": "asdgf",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A stupid simple way to test",
   "main": "index.js",
   "module": "index.js",
