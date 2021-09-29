@@ -1,37 +1,20 @@
 {
-  "name": "asdgf",
-  "version": "0.0.3",
-  "description": "A stupid simple way to test",
-  "main": "index.js",
-  "module": "index.js",
-  "scripts": {
-    "build": "esbuild index.js --minify --format=esm --outfile=asdgf.min.js",
-    "build:wtr": "esbuild wtr/index.js --bundle --external:@web/test-runner-core --format=esm --minify --outfile=wtr.js",
-    "prepublish": "npm run build && npm run build:wtr"
-  },
+  "name": "@asdgf/root",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thepassle/asdgf.git"
+    "url": "https://github.com/thepassle/asdgf.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/thepassle/asdgf/issues"
+  "scripts": {
+    "test": "yarn workspaces run test"
   },
-  "homepage": "https://github.com/thepassle/asdgf#readme",
+  "dependencies": {},
   "devDependencies": {
     "esbuild": "^0.13.2"
   },
-  "files": [
-    "ui/test-report.js",
-    "wtr/index.js",
-    "index.js",
-    "asdgf.min.js",
-    "wtr.js",
-    "types.d.ts"
-  ],
-  "dependencies": {
-    "@web/test-runner-core": "^0.10.21"
-  }
+  "workspaces": [
+    "packages/*"
+  ]
 }

@@ -1,0 +1,30 @@
+{
+  "name": "@asdgf/core",
+  "version": "0.0.1",
+  "description": "A stupid simple way to test",
+  "main": "index.js",
+  "module": "index.js",
+  "types": "types.d.ts",
+  "scripts": {
+    "build": "esbuild src/index.js --minify --format=esm --outfile=index.js",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thepassle/asdgf.git"
+  },
+  "keywords": ["mocha", "test", "testing", "assert", "expect"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thepassle/asdgf/issues"
+  },
+  "homepage": "https://github.com/thepassle/asdgf#readme",
+  "contributors": ["Pascal Schilp <pascalschilp@gmail.com>"],
+  "files": [
+    "src/index.js",
+    "index.js",
+    "types.d.ts"
+  ],
+  "dependencies": {}
+}

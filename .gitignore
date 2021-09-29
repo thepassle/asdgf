@@ -1,4 +1,3 @@
+dist/
 node_modules/
-.vscode/
-asdgf.min.js
-wtr.js
+.DS_Store

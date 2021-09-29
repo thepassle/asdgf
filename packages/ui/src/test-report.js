@@ -7,13 +7,11 @@ template.innerHTML = /*html*/ `
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       font-size: 16px;
     }
-
     .wrapper {
       padding: 10px;
       border-radius: 5px;
       margin-bottom: 10px;
     }
-
     .passed {
       color: #0f5132;
       background-color: #d1e7dd;
@@ -32,12 +30,10 @@ template.innerHTML = /*html*/ `
       border: solid 1px;
       border-color: #f5c2c7;
     }
-
     .error-message {
       margin-top: 10px;
       margin-bottom: 10px;
     }
-
     .stack {
       overflow:auto;
       color: #636464;
@@ -46,7 +42,6 @@ template.innerHTML = /*html*/ `
       border-radius: 5px;
       padding: 5px 10px;
     }
-
     pre {
       font-size: 12px;
     }
