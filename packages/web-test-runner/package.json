@@ -1,0 +1,29 @@
+{
+  "name": "@asdgf/web-test-runner",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thepassle/asdgf.git"
+  },
+  "author": "Pascal Schilp",
+  "homepage": "https://github.com/thepassle/asdgf",
+  "bugs": {
+    "url": "https://github.com/thepassle/asdgf"
+  },
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --external:@web/test-runner-core --format=esm --minify --outfile=index.js"
+  },
+  "contributors": ["Pascal Schilp <pascalschilp@gmail.com>"],
+  "dependencies": {
+    "@web/test-runner-core": "^0.10.21",
+    "@asdgf/core": "0.0.3"
+  },
+  "files": [
+    "src/index.js",
+    "index.js"
+  ]
+}
