@@ -1,3 +1,1 @@
-#!/usr/bin/env node
-import{executeTests as p}from"@asdgf/core";import{globby as m}from"globby";import{sep as g}from"path";import{getCliConfig as d,getUserConfig as u,mergeGlobsAndExcludes as f,DEFAULTS as r}from"./utils/index.js";import"chokidar";import"debounce";const b={suiteStart:({name:o,only:e,tests:t})=>{console.log(`
-\u2B1C\uFE0F Starting suite: "${o}"`)},renderTest:o=>{console.log(`  ${o.passed?"\u2705":"\u274C"} "${o.name}"`)},suiteEnd:o=>{}};(async()=>{const o=[],{...e}=d(),t=await u(),i={...r,...t,...e},n=f(r,t,e),a=(await m(n)).map(async s=>{await import(`${process.cwd()}${g}${s}`);const c={renderer:i?.reporter??b},l=await p(c);o.push(l),globalThis.QUEUE=[]});await Promise.all(a),o.forEach(({passed:s})=>{s||process.exit(1)})})();
+export { describe, executeTests } from '@asdgf/core';
