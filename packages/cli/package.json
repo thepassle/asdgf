@@ -35,7 +35,7 @@
     "index.js"
   ],
   "dependencies": {
-    "@asdgf/core": "^0.0.1",
+    "@asdgf/core": "^0.0.2",
     "@web/config-loader": "0.1.3",
     "chokidar": "3.5.2",
     "command-line-args": "5.2.0",

@@ -29,8 +29,9 @@ import { red, green } from 'nanocolors';
   
       try {
         await import(`${path}?${randomInt(0, 1000000000)}`);
-      } catch {
+      } catch(e) {
         console.log(red(`Failed to import test file: ${path}`));
+        console.log(e.stack)
       }
   
       const results = await executeTests({renderer: mergedOptions.reporter});
@@ -53,7 +54,10 @@ import { red, green } from 'nanocolors';
     fileWatcher.addListener('change', onChange);
     fileWatcher.addListener('unlink', onChange);
   } else {
-    allResults.forEach(({passed}) => {
+    allResults.forEach(({passed, errors}) => {
+      errors?.forEach(e => {
+        console.log(e?.details);
+      })
       if(!passed) {
         console.log(red('Test run failed.'));
         process.exit(1);

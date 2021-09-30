@@ -5,11 +5,6 @@
 "@asdgf/core@0.0.3":
   version "0.0.2"
 
-"@asdgf/core@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@asdgf/core/-/core-0.0.1.tgz#a939efe243115a22b2427a9be31411b3da0fd8b7"
-  integrity sha512-yLlaD2VCc1tADi8FYiFnfiJFtZb+J7lZQd5kFYuriLkrwUILseeb90h+tyP0YlwZXqvDQLDqeTfxVupK+kbrMA==
-
 "@babel/code-frame@^7.12.11":
   version "7.14.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.14.5.tgz#23b08d740e83f49c5e59945fbf1b43e80bbf4edb"
