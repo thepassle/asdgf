@@ -2,15 +2,15 @@ const timer = (now = Date.now()) => () => (Date.now() - now).toFixed(2) + 'ms';
 globalThis.QUEUE = [];
 
 /**
- * @typedef {import('./types').Renderer} Renderer
- * @typedef {import('./types').ExecutionOptions} ExecutionOptions
- * @typedef {import('./types').Report} Report
- * @typedef {import('./types').Suite} Suite
- * @typedef {import('./types').TestSuiteResult} TestSuiteResult
- * @typedef {import('./types').TestFn} TestFn
- * @typedef {import('./types').Describe} Describe
- * @typedef {import('./types').Handler} Handler
- * @typedef {import('./types').Setup} Setup
+ * @typedef {import('../types').Renderer} Renderer
+ * @typedef {import('../types').ExecutionOptions} ExecutionOptions
+ * @typedef {import('../types').Report} Report
+ * @typedef {import('../types').Suite} Suite
+ * @typedef {import('../types').TestSuiteResult} TestSuiteResult
+ * @typedef {import('../types').TestFn} TestFn
+ * @typedef {import('../types').Describe} Describe
+ * @typedef {import('../types').Handler} Handler
+ * @typedef {import('../types').Setup} Setup
  */
 
 /**
@@ -44,7 +44,7 @@ function createDescribe(name, handler, options = {}) {
 /** @type {Describe} describe */
 export const describe = (name, handler) => createDescribe(name, handler);
 describe.only = (name, handler) => createDescribe(name, handler, {suiteOnly: true})
-/** @TODO .skip */
+describe.skip = (name, handler) => createDescribe(name, handler, {skip: true})
 
 /**
  * Runs the given tests in a suite, and its lifecycle hooks like before, beforeEach, after, afterEach
@@ -54,7 +54,7 @@ describe.only = (name, handler) => createDescribe(name, handler, {suiteOnly: tru
  * @return {Promise<TestSuiteResult>} testSuiteResult
  */
 async function run(suite, {renderer} = {}) {
-  const { name, only, tests, before, after, beforeEach, afterEach } = suite;
+  const { name, only, tests, before, after, beforeEach, afterEach, skip } = suite;
   const testsToRun = only.length ? only : tests;
 
   const testSuiteResult = {
@@ -65,8 +65,17 @@ async function run(suite, {renderer} = {}) {
     tests: []
   }
 
+  if(skip) {
+    renderer?.suiteStart?.({skip, name, only, tests});    
+    testSuiteResult.skipped = testsToRun.length;
+    testSuiteResult.tests = testsToRun.map(({name}) => ({name, passed: false, duration: '', error: false, skipped: true}));
+    testSuiteResult.total = testsToRun.length;
+    renderer?.suiteEnd?.(testSuiteResult);
+    return testSuiteResult;
+  }
+
   try {
-    renderer?.suiteStart?.({name, only, tests});
+    renderer?.suiteStart?.({skip, name, only, tests});
     await before?.();
 
     for (const test of testsToRun) {
@@ -85,6 +94,8 @@ async function run(suite, {renderer} = {}) {
         const { skipped } = await test.handler() || {};
         testResult.duration = time();
         testResult.skipped = !!skipped;
+        testResult.passed = !skipped;
+
         if(testResult.skipped) testSuiteResult.skipped++;
         await afterEach?.();
       } catch (err) {

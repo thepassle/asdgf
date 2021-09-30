@@ -78,6 +78,8 @@ import { executeTests } from '@asdgf/core';
  * Log progress to the console
  */
 const renderer = {
+  /** Runs before all suites run, depending on the integration */
+  start: () => {},
   /** Runs before the suite starts, can be used for set up */
   suiteStart: ({name, only, tests}) => {
     console.log(`Starting suite: [${name}]`);
@@ -89,7 +91,9 @@ const renderer = {
   /** Runs after the entire suite has ran */
   suiteEnd: (testSuiteResult) => {
     console.log(`End of suite: [${testSuiteResult.name}]`);
-  }
+  },
+  /** Runs after all suites run, depending on the integration */
+  end: () => {}
 }
 
 executeTests({renderer});

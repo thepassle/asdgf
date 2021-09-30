@@ -4,6 +4,7 @@
   "description": "A stupid simple way to test",
   "main": "index.js",
   "module": "index.js",
+  "type": "module",
   "types": "types.d.ts",
   "scripts": {
     "build": "esbuild src/index.js --minify --format=esm --outfile=index.js",
