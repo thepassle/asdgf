@@ -20,7 +20,8 @@
   "contributors": ["Pascal Schilp <pascalschilp@gmail.com>"],
   "dependencies": {
     "@web/test-runner-core": "^0.10.21",
-    "@asdgf/core": "0.0.3"
+    "@asdgf/core": "0.0.3",
+    "@asdgf/ui": "0.0.2"
   },
   "files": [
     "src/index.js",
