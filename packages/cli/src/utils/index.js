@@ -3,15 +3,7 @@ import commandLineArgs from 'command-line-args';
 
 const IGNORE = ['!node_modules/**/*.*'];
 
-const has = arr => Array.isArray(arr) && arr.length > 0;
-
 export function mergeGlobsAndExcludes(defaults, userConfig, cliConfig) {
-  const hasProvidedCliGlobs = has(cliConfig?.globs) || has(userConfig?.globs);
-
-  if(hasProvidedCliGlobs) {
-    defaults.globs = defaults.globs.filter(glob => glob !== '**/*.{js,ts,tsx}');
-  }
-
   const merged = [
     ...defaults.globs,
     ...(userConfig?.globs || []),
@@ -43,8 +35,6 @@ export function getCliConfig() {
   const optionDefinitions = [
     { name: 'globs', type: String, multiple: true },
     { name: 'exclude', type: String, multiple: true },
-    { name: 'watch', type: Boolean },
-    { name: 'watchfiles', type: String, multiple: true },
   ];
   
   return commandLineArgs(optionDefinitions);
@@ -74,9 +64,7 @@ export const reporter = {
 };
 
 export const DEFAULTS = {
-  watchfiles: [],
   globs: ['test/**/*.test.js'],
   exclude: [],
-  watch: false,
   reporter
 }

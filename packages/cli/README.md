@@ -18,20 +18,16 @@ asdgf
 | ---------------- | ---------- | ----------------------------------------------------------- | --------------------------- |
 | --globs          | string[]   | Globs to analyze                                            | `--globs "**/*.test.js"`    |
 | --exclude        | string[]   | Globs to exclude                                            | `--exclude "!foo.test.js"`  |
-| --watch          | boolean    | Run tests in watch mode                                     | `--watch`                   |
-| --watchfiles     | string[]   | Rerun tests when any of these files change                  | `--watchfiles "src/**/*"`   |
 
 Example:
 ```
-asdgf --watch --exclude "!foo.test.js"
+asdgf --globs **/*.test.js
 ```
 
 ### Config file
 `asdgf.config.js`:
 ```js
 export default {
-  watch: true,
-  watchfiles: ['src/**/*'],
   globs: ['**/*.test.js'],
   exclude: ['!foo.test.js'],
   reporter: {
