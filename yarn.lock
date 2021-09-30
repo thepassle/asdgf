@@ -3,7 +3,12 @@
 
 
 "@asdgf/core@0.0.3":
+  version "0.0.2"
+
+"@asdgf/core@^0.0.1":
   version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@asdgf/core/-/core-0.0.1.tgz#a939efe243115a22b2427a9be31411b3da0fd8b7"
+  integrity sha512-yLlaD2VCc1tADi8FYiFnfiJFtZb+J7lZQd5kFYuriLkrwUILseeb90h+tyP0YlwZXqvDQLDqeTfxVupK+kbrMA==
 
 "@babel/code-frame@^7.12.11":
   version "7.14.5"
@@ -1139,7 +1144,7 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-nanocolors@^0.2.1:
+nanocolors@^0.2.1, nanocolors@^0.2.12:
   version "0.2.12"
   resolved "https://registry.yarnpkg.com/nanocolors/-/nanocolors-0.2.12.tgz#4d05932e70116078673ea4cc6699a1c56cc77777"
   integrity sha512-SFNdALvzW+rVlzqexid6epYdt8H9Zol7xDoQarioEFcFN0JHo4CYNztAxmtfgGTVRCmFlEOqqhBpoFGKqSAMug==
