@@ -56,7 +56,7 @@ import { red, green } from 'nanocolors';
   } else {
     allResults.forEach(({passed, errors}) => {
       errors?.forEach(e => {
-        console.log(e?.details);
+        console.log(e?.details || e?.message);
       })
       if(!passed) {
         console.log(red('Test run failed.'));
