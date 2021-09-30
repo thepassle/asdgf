@@ -59,8 +59,8 @@ export const reporter = {
     console.log(`Starting suite: "${name}"`);
   },
   /** Runs after every ran test, whether it's skipped, passed, or failed */
-  renderTest: (testResult) => {
-    console.log(`  ${testResult.passed ? '✅' : '❌'} "${testResult.name}"`);
+  renderTest: ({skipped, passed, name}) => {
+    console.log(`  ${skipped ? '⚫️' : passed ? '✅' : '❌'} "${name}"`);
   },
   /** Runs after the entire suite has ran */
   suiteEnd: (testSuiteResult) => {
