@@ -1,6 +1,6 @@
 {
   "name": "@asdgf/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A stupid simple way to test",
   "main": "test-report.js",
   "module": "test-report.js",

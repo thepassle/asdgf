@@ -1,6 +1,6 @@
 {
   "name": "@asdgf/cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A stupid simple way to test",
   "main": "index.js",
   "module": "index.js",
@@ -30,7 +30,9 @@
     "Pascal Schilp <pascalschilp@gmail.com>"
   ],
   "files": [
-    "src/index.js"
+    "src/cli.js",
+    "src/utils/index.js",
+    "index.js"
   ],
   "dependencies": {
     "@asdgf/core": "^0.0.1",
