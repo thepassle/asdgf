@@ -20,6 +20,7 @@ import { red, green } from 'nanocolors';
   const mergedOptions = { ...DEFAULTS, ...userConfig, ...cliConfig };
   const merged = mergeGlobsAndExcludes(DEFAULTS, userConfig, cliConfig);
   const globs = await globby(merged);
+  const watchfiles = await globby(mergedOptions.watchfiles);
 
   async function run() {
     mergedOptions?.reporter?.start?.();
@@ -47,7 +48,7 @@ import { red, green } from 'nanocolors';
   await run();
 
   if(mergedOptions.watch) {
-    const fileWatcher = chokidar.watch(globs);
+    const fileWatcher = chokidar.watch([...globs, ...watchfiles]);
 
     const onChange = debounce(run, 100);
 

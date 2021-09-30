@@ -1,6 +1,6 @@
 {
   "name": "@asdgf/cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A stupid simple way to test",
   "main": "index.js",
   "module": "index.js",

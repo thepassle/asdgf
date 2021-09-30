@@ -44,6 +44,7 @@ export function getCliConfig() {
     { name: 'globs', type: String, multiple: true },
     { name: 'exclude', type: String, multiple: true },
     { name: 'watch', type: Boolean },
+    { name: 'watchfiles', type: String, multiple: true },
   ];
   
   return commandLineArgs(optionDefinitions);
@@ -73,6 +74,7 @@ export const reporter = {
 };
 
 export const DEFAULTS = {
+  watchfiles: [],
   globs: ['test/**/*.test.js'],
   exclude: [],
   watch: false,
