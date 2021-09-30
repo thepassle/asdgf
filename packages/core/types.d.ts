@@ -31,8 +31,12 @@ export type Handler = (tools: Tools) => void
 
 export interface Describe {
   (name: string, handler: Handler): void | Promise<void>,
-  only: (name: string, handler: Handler) => void | Promise<void>
+  only: (name: string, handler: Handler) => void | Promise<void>,
+  skip: (name: string, handler: Handler) => void | Promise<void>
 }
+
+export function executeTests(opts: ExecutionOptions): Promise<Report>
+export const describe: Describe;
 
 export interface TestObject {
   name: string,
@@ -43,6 +47,7 @@ export interface Suite {
   name?: string,
   tests: TestObject[],
   suiteOnly: boolean,
+  skip?: boolean,
   only?: TestObject[],
   before?: Callback,
   beforeEach?: Callback,
@@ -70,13 +75,21 @@ export interface ExecutionOptions {
   renderer?: Renderer
 }
 
+/**
+ * `executeTests` only calls `suiteStart`, `renderTest` and `suiteEnd`.
+ * `start` and `end` are to be called by the integration
+ */
 export interface Renderer {
+  /** Runs before all suites run */
+  start?: () => void,
   /** Runs before the suite starts, can be used for set up */
-  suiteStart?: (args: {name: string, only: TestObject[], tests: TestObject[]}) => void,
+  suiteStart?: (args: {name: string, skip: boolean, only: TestObject[], tests: TestObject[]}) => void,
   /** Runs after every ran test, whether it's skipped, passed, or failed */
   renderTest?: (TestResult) => void,
   /** Runs after the entire suite has ran */
   suiteEnd?: (TestSuiteResult) => void
+  /** Runs after all suites have ran */
+  end?: () => void,
 }
 
 export interface Report {

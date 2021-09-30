@@ -33,18 +33,26 @@ export default {
   globs: ['**/*.test.js'],
   exclude: ['!foo.test.js'],
   reporter: {
+    /** Runs before all suites run */
+    start: () => {
+      console.log('start\n');
+    },
     /** Runs before the suite starts, can be used for set up */
     suiteStart: ({name, only, tests}) => {
-      console.log(`Starting suite: [${name}]`);
+      console.log(`Starting suite: "${name}"`);
     },
     /** Runs after every ran test, whether it's skipped, passed, or failed */
     renderTest: (testResult) => {
-      console.log(`${testResult.name}: ${testResult.passed ? '✅' : '❌'}`);
+      console.log(`  ${testResult.passed ? '✅' : '❌'} "${testResult.name}"`);
     },
     /** Runs after the entire suite has ran */
     suiteEnd: (testSuiteResult) => {
-      console.log(`End of suite: [${testSuiteResult.name}]`);
+      console.log('\n')
+    },
+    /** Runs after all suites have ran */
+    end: () => {
+      console.log('end');
     }
-  }
+  };
 }
 ```

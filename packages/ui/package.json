@@ -4,6 +4,7 @@
   "description": "A stupid simple way to test",
   "main": "test-report.js",
   "module": "test-report.js",
+  "type": "module",
   "scripts": {
     "build": "esbuild src/test-report.js --minify --format=esm --outfile=test-report.js",
     "prepublish": "npm run build"
