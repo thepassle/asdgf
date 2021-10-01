@@ -1,6 +1,6 @@
 {
   "name": "@asdgf/testing-helpers",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A stupid simple way to test",
   "type": "module",
   "scripts": {
