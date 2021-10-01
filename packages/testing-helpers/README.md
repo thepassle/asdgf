@@ -9,7 +9,7 @@ Opinionated package of small, performant, minified, ESM-friendly reexported help
 ## ~~Sinon~~ ➡️ [Hanbi](https://www.npmjs.com/package/hanbi)
 
 ```js
-import { stub, spy } from '@asdgf/testing-helpers/hanbi/index.js';
+import { spy, stub, stubMethod, restore } from '@asdgf/testing-helpers/hanbi/index.js';
 ```
 
 ## ~~Chai~~ ➡️ [uvu/assert](https://www.npmjs.com/package/uvu)
@@ -31,7 +31,7 @@ import { waitUntil, nextFrame, aTimeout } from '@asdgf/testing-helpers/open-wc/t
 
 ```js
 import { describe } from '@asdgf/core';
-import { stub, spy } from '@asdgf/testing-helpers/hanbi/index.js';
+import * as hanbi from '@asdgf/testing-helpers/hanbi/index.js';
 import { assert } from '@asdgf/testing-helpers/uvu/assert/index.js';
 import { fixture, fixtureCleanup } from '@asdgf/testing-helpers/open-wc/index.js';
 

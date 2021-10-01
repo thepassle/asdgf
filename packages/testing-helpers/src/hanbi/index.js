@@ -1,1 +1,1 @@
-export { spy, stub } from 'hanbi';
+export { spy, stub, stubMethod, restore } from 'hanbi';
