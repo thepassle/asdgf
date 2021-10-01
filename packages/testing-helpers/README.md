@@ -31,7 +31,7 @@ import { waitUntil, nextFrame, aTimeout } from '@asdgf/testing-helpers/open-wc/t
 
 ```js
 import { describe } from '@asdgf/core';
-import * as hanbi from '@asdgf/testing-helpers/hanbi/index.js';
+import { stubMethod, restore } from '@asdgf/testing-helpers/hanbi/index.js';
 import { assert } from '@asdgf/testing-helpers/uvu/assert/index.js';
 import { fixture, fixtureCleanup } from '@asdgf/testing-helpers/open-wc/index.js';
 
@@ -50,10 +50,10 @@ describe('my-element', ({it, afterEach}) => {
 
   it('renders correctly', async () =>{
     const el = await fixture('<my-element></my-element>');
-    const stub = hanbi.stubMethod(el, 'getName').returns('foo');
+    stubMethod(el, 'getName').returns('foo');
     el.connectedCallback();
-    assert(el.textContent, 'hello foo');
-    stub.restore();
+    assert.is(el.textContent, 'hello foo');
+    restore();
   });
 });
 ```
