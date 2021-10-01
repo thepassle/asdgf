@@ -1,0 +1,1 @@
+export * as assert from 'uvu/assert';

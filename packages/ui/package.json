@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "build": "esbuild src/test-report.js --minify --format=esm --outfile=test-report.js",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",

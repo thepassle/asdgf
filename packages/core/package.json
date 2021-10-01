@@ -8,7 +8,7 @@
   "types": "types.d.ts",
   "scripts": {
     "build": "esbuild src/index.js --minify --format=esm --outfile=index.js",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",

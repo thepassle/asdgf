@@ -1,0 +1,46 @@
+{
+  "name": "@asdgf/testing-helpers",
+  "version": "0.0.1",
+  "description": "A stupid simple way to test",
+  "type": "module",
+  "scripts": {
+    "hanbi": "esbuild src/hanbi/index.js --bundle --minify --format=esm --outfile=hanbi/index.js",
+    "uvu": "esbuild src/uvu/index.js --bundle --minify --format=esm --outfile=uvu/assert/index.js",
+    "owc": "esbuild src/open-wc/index.js --bundle --minify --format=esm --outfile=open-wc/index.js",
+    "owc:timing": "esbuild src/open-wc/timing/index.js --bundle --minify --format=esm --outfile=open-wc/timing/index.js",
+    "build": "yarn hanbi && yarn uvu && yarn owc && yarn owc:timing",
+    "prepublishOnly": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thepassle/asdgf.git"
+  },
+  "keywords": [
+    "mocha",
+    "test",
+    "testing",
+    "assert",
+    "expect"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thepassle/asdgf/issues"
+  },
+  "homepage": "https://github.com/thepassle/asdgf#readme",
+  "contributors": [
+    "Pascal Schilp <pascalschilp@gmail.com>"
+  ],
+  "files": [
+    "uvu/assert/index.js",
+    "hanbi/index.js",
+    "open-wc/index.js",
+    "open-wc/timing/index.js"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@open-wc/testing-helpers": "^1.8.12",
+    "hanbi": "^1.0.1",
+    "uvu": "^0.5.1"
+  }
+}

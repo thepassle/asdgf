@@ -8,3 +8,4 @@ A stupid simple way to test.
 - [`@asdgf/cli`](./packages/cli) CLI tool to run tests in node, using `@asdgf/core`
 - [`@asdgf/web-test-runner`](./packages/web-test-runner) Integration for [@web/test-runner](https://www.npmjs.com/package/@web/test-runner)
 - [`@asdgf/ui`](./packages/ui) UI components and custom reporters for reporting test status
+- [`@asdgf/testing-helpers`](./packages/testing-helpers) Opinionated package of small, performant, minified, ESM-friendly reexported helper libraries
