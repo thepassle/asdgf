@@ -38,17 +38,19 @@ import { red, green } from 'nanocolors';
 
   mergedOptions?.reporter?.end?.();
 
-  allResults.forEach(({passed, errors}) => {
+  const failed = allResults.some(({passed}) => !passed);
+
+  allResults.forEach(({errors}) => {
     errors?.forEach(e => {
       console.log(e?.details || e?.message);
     });
-
-    if(passed) {
-      console.log(green('All tests passed.'));
-      process.exit(0);
-    } else {
-      console.log(red('Test run failed.'));
-      process.exit(1);
-    }
   });
+
+  if(failed) {
+    console.log(red('Test run failed.'));
+    process.exit(1);
+  } else {
+    console.log(green('All tests passed.'));
+    process.exit(0);
+  }
 })();
