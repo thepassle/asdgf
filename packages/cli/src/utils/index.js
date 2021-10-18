@@ -1,3 +1,4 @@
+import path from 'path';
 import { readConfig, ConfigLoaderError } from '@web/config-loader';
 import commandLineArgs from 'command-line-args';
 
@@ -64,7 +65,10 @@ export const reporter = {
 };
 
 export const DEFAULTS = {
-  globs: ['test/**/*.test.js'],
+  globs: [
+    path.join(process.cwd(), 'test/**/*.test.js').replace(/\\/g, '/')
+    // 'test/**/*.test.js'
+  ],
   exclude: [],
   reporter
 }

@@ -1,0 +1,28 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  test-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org
+
+      - name: Install Packages
+        run: npm i
+
+      - name: Run Tests
+        run: node packages/cli/src/cli.js
