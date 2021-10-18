@@ -1,8 +1,7 @@
-import { sep } from 'path';
 import { readConfig, ConfigLoaderError } from '@web/config-loader';
 import commandLineArgs from 'command-line-args';
 
-const IGNORE = [`!node_modules${sep}**${sep}*.*`];
+const IGNORE = ['!node_modules/**/*.*'];
 
 export function mergeGlobsAndExcludes(defaults, userConfig, cliConfig) {
   const merged = [
@@ -65,7 +64,7 @@ export const reporter = {
 };
 
 export const DEFAULTS = {
-  globs: [`test${sep}**${sep}*.test.js`],
+  globs: ['test/**/*.test.js'],
   exclude: [],
   reporter
 }
