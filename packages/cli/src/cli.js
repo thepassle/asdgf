@@ -19,7 +19,7 @@ import { red, green } from 'nanocolors';
   let failedImports = 0;
 
   if(globs.length === 0) {
-    console.log(red('Could not find any testfiles to run.'));
+    console.log(red('Could not find any testfiles to run.'), `\n\nmerged: ${merged}\n\nglobs: ${globs}`);
     process.exit(1);
   }
 
