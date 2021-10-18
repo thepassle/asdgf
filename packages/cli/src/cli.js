@@ -2,7 +2,7 @@
 
 import { executeTests } from '@asdgf/core';
 import { globby } from 'globby';
-import { sep } from 'path';
+import { posix } from 'path';
 import { getCliConfig, getUserConfig, mergeGlobsAndExcludes, DEFAULTS } from './utils/index.js';
 import { red, green } from 'nanocolors';
 
@@ -18,10 +18,15 @@ import { red, green } from 'nanocolors';
   const allResults = [];
   let failedImports = 0;
 
+  if(globs.length === 0) {
+    console.log(red('Could not find any testfiles to run.'));
+    process.exit(1);
+  }
+
   mergedOptions?.reporter?.start?.();
 
   const testFiles = globs.map(async (g) => {
-    const path = `${process.cwd()}${sep}${g}`; 
+    const path = posix.join(process.cwd(), g); 
 
     try {
       await import(path);
