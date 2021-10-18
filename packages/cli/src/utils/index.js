@@ -1,7 +1,8 @@
+import { sep } from 'path';
 import { readConfig, ConfigLoaderError } from '@web/config-loader';
 import commandLineArgs from 'command-line-args';
 
-const IGNORE = ['!node_modules/**/*.*'];
+const IGNORE = [`!node_modules${sep}**${sep}*.*`];
 
 export function mergeGlobsAndExcludes(defaults, userConfig, cliConfig) {
   const merged = [
@@ -43,15 +44,15 @@ export function getCliConfig() {
 export const reporter = {
   /** Runs before all suites run */
   start: () => {
-    console.log('start\n');
+
   },
   /** Runs before the suite starts, can be used for set up */
   suiteStart: ({name, only, tests}) => {
-    console.log(`Starting suite: "${name}"`);
+    console.log(name);
   },
   /** Runs after every ran test, whether it's skipped, passed, or failed */
   renderTest: ({skipped, passed, name}) => {
-    console.log(`  ${skipped ? '⚫️' : passed ? '✅' : '❌'} "${name}"`);
+    console.log(`  ${skipped ? '⚫️' : passed ? '✅' : '❌'} ${name}`);
   },
   /** Runs after the entire suite has ran */
   suiteEnd: (testSuiteResult) => {
@@ -59,12 +60,12 @@ export const reporter = {
   },
   /** Runs after all suites have ran */
   end: () => {
-    console.log('end');
+
   }
 };
 
 export const DEFAULTS = {
-  globs: ['test/**/*.test.js'],
+  globs: [`test${sep}**${sep}*.test.js`],
   exclude: [],
   reporter
 }

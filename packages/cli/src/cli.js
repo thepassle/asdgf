@@ -16,6 +16,7 @@ import { red, green } from 'nanocolors';
   const globs = await globby(merged);
 
   const allResults = [];
+  let failedImports = 0;
 
   mergedOptions?.reporter?.start?.();
 
@@ -25,6 +26,7 @@ import { red, green } from 'nanocolors';
     try {
       await import(path);
     } catch(e) {
+      failedImports++;
       console.log(red(`Failed to import test file: ${path}`));
       console.log(e.stack)
     }
@@ -38,7 +40,7 @@ import { red, green } from 'nanocolors';
 
   mergedOptions?.reporter?.end?.();
 
-  const failed = allResults.some(({passed}) => !passed);
+  const failed = allResults.some(({passed}) => !passed) || failedImports > 0;
 
   allResults.forEach(({errors}) => {
     errors?.forEach(e => {
