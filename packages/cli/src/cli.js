@@ -19,20 +19,19 @@ import { red, green } from 'nanocolors';
   let failedImports = 0;
 
   if(globs.length === 0) {
-    console.log(red('Could not find any testfiles to run.'));
+    console.log(red('Could not find any testfiles to run.'), `\n\n${merged}\n\n${globs}`);
     process.exit(1);
   }
 
   mergedOptions?.reporter?.start?.();
 
-  const testFiles = globs.map(async (g) => {
-    const path = posix.join(process.cwd(), g); 
+  const testFiles = globs.map(async (g) => { 
 
     try {
-      await import(path);
+      await import(g);
     } catch(e) {
       failedImports++;
-      console.log(red(`Failed to import test file: ${path}`));
+      console.log(red(`Failed to import test file: ${g}`));
       console.log(e.stack)
     }
 

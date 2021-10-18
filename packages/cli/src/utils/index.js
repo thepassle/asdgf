@@ -1,3 +1,5 @@
+import path from 'path';
+import { pathToFileURL } from 'url';
 import { readConfig, ConfigLoaderError } from '@web/config-loader';
 import commandLineArgs from 'command-line-args';
 
@@ -64,7 +66,11 @@ export const reporter = {
 };
 
 export const DEFAULTS = {
-  globs: ['test/**/*.test.js'],
+  globs: [
+    pathToFileURL(path.join(process.cwd(), 'test/**/*.test.js').replace(/\\/g, '/')).href
+    // 'test/**/*.test.js'
+  ],
   exclude: [],
   reporter
 }
+
