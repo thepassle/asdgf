@@ -1,4 +1,4 @@
-import { sep } from 'path';
+import { posix } from 'path';
 import { readConfig, ConfigLoaderError } from '@web/config-loader';
 import commandLineArgs from 'command-line-args';
 
@@ -65,7 +65,7 @@ export const reporter = {
 };
 
 export const DEFAULTS = {
-  globs: [`test/**/*.test.js`],
+  globs: [posix.join(process.cwd(), `test/**/*.test.js`)],
   exclude: [],
   reporter
 }
