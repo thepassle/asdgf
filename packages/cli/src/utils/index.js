@@ -1,6 +1,7 @@
 import path from 'path';
 import { readConfig, ConfigLoaderError } from '@web/config-loader';
 import commandLineArgs from 'command-line-args';
+import { bold, red, green, dim } from 'nanocolors';
 
 const IGNORE = ['!node_modules/**/*.*'];
 
@@ -48,11 +49,14 @@ export const reporter = {
   },
   /** Runs before the suite starts, can be used for set up */
   suiteStart: ({name, only, tests}) => {
-    console.log(name);
+    console.log(bold(name));
   },
   /** Runs after every ran test, whether it's skipped, passed, or failed */
   renderTest: ({skipped, passed, name}) => {
-    console.log(`  ${skipped ? '⚫️' : passed ? '✅' : '❌'} ${name}`);
+    const col = skipped ? dim : passed ? green : red;
+    const emoji = skipped ? '⚫️' : passed ? '✅' : '❌';
+
+    console.log(`  ${emoji} ${col(name)}`);
   },
   /** Runs after the entire suite has ran */
   suiteEnd: (testSuiteResult) => {
