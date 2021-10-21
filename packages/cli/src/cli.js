@@ -2,7 +2,7 @@
 
 import { executeTests } from '@asdgf/core';
 import { globby } from 'globby';
-import { posix } from 'path';
+import { pathToFileURL } from 'url';
 import { getCliConfig, getUserConfig, mergeGlobsAndExcludes, DEFAULTS } from './utils/index.js';
 import { red, green } from 'nanocolors';
 
@@ -26,7 +26,7 @@ import { red, green } from 'nanocolors';
   mergedOptions?.reporter?.start?.();
 
   const testFiles = globs.map(async (g) => {
-    const path = posix.join(process.cwd(), g); 
+    const path = pathToFileURL(g).href;
 
     try {
       await import(path);
