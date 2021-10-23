@@ -46,6 +46,15 @@ export const describe = (name, handler) => createDescribe(name, handler);
 describe.only = (name, handler) => createDescribe(name, handler, {suiteOnly: true})
 describe.skip = (name, handler) => createDescribe(name, handler, {skip: true})
 
+async function withErrorHandling(type = '', handler) {
+  try {
+    await handler?.();
+  } catch (e) {
+    console.error(`Error in hook "${type}":`);
+    throw new Error(e);
+  }
+}
+
 /**
  * Runs the given tests in a suite, and its lifecycle hooks like before, beforeEach, after, afterEach
  * 
@@ -74,50 +83,44 @@ async function run(suite, {renderer} = {}) {
     return testSuiteResult;
   }
 
-  try {
-    renderer?.suiteStart?.({skip, name, only, tests});
-    await before?.();
+  renderer?.suiteStart?.({skip, name, only, tests});
+  await withErrorHandling('before', before);
 
-    for (const test of testsToRun) {
-      const testResult = {
-        name: test.name,
-        passed: true,
-        skipped: false,
-        duration: '',
-        error: false  
-      }
-
-      const time = timer();
-      try {
-        await beforeEach?.();
-        
-        const { skipped } = await test.handler() || {};
-        testResult.duration = time();
-        testResult.skipped = !!skipped;
-        testResult.passed = !skipped;
-
-        if(testResult.skipped) testSuiteResult.skipped++;
-        await afterEach?.();
-      } catch (err) {
-        testSuiteResult.failed++;
-        testResult.passed = false;
-        testResult.duration = time();
-
-        await afterEach?.();
-        
-        testResult.error = {expected: err?.expects, ...err, message: err.message, stack: err.stack};
-      } finally {
-        testSuiteResult.total++;
-        renderer?.renderTest?.(testResult);
-        testSuiteResult.tests.push(testResult);
-      }
+  for (const test of testsToRun) {
+    const testResult = {
+      name: test.name,
+      passed: true,
+      skipped: false,
+      duration: '',
+      error: false  
     }
-  } finally {
-    await after?.();
 
-    renderer?.suiteEnd?.(testSuiteResult); 
-    return testSuiteResult;
+    const time = timer();
+    await withErrorHandling('beforeEach', beforeEach);
+    
+    try {
+      const { skipped } = await test.handler() || {};
+      testResult.duration = time();
+      testResult.skipped = !!skipped;
+      testResult.passed = !skipped;
+
+      if(testResult.skipped) testSuiteResult.skipped++;
+    } catch (err) {
+      testSuiteResult.failed++;
+      testResult.passed = false;
+      testResult.duration = time();
+      
+      testResult.error = {expected: err?.expects, ...err, message: err.message, stack: err.stack};
+    } finally {
+      testSuiteResult.total++;
+      renderer?.renderTest?.(testResult);
+      testSuiteResult.tests.push(testResult);
+    } 
+    await withErrorHandling('afterEach', afterEach);
   }
+  await withErrorHandling('after', after);
+  renderer?.suiteEnd?.(testSuiteResult); 
+  return testSuiteResult;
 }
 
 /** 
