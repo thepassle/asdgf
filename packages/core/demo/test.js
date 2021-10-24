@@ -2,10 +2,14 @@ import { describe, executeTests } from '../src/index.js';
 
 describe('foo', ({it, before, after, beforeEach, afterEach}) => {
 
-  before(() => {throw new Error('before')});
+  // before(() => {throw new Error('asdf sdaf sadf ')});
   // beforeEach(() => {throw new Error('beforeEach')});
   // afterEach(() => {throw new Error('afterEach')});
   // after(() => {throw new Error('after')});
+
+  describe('bar', ({it}) => {
+    it('test one', () => { console.log('test one ran')} );
+  });
 
   it('test one', () => { console.log('test one ran')} );
   it('test two', () => { throw new Error() } );

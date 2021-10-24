@@ -4,15 +4,6 @@ type Hook = (cb: Callback) => void | Promise<void>
 export type SkipFn = () => ({skipped: boolean} | Promise<{skipped: boolean}>)
 export type TestFn = () => void | Promise<void>
 
-export interface Setup {
-  suite: Suite,
-  it: It,
-  before: Hook,
-  beforeEach: Hook,
-  after: Hook,
-  afterEach: Hook,
-}
-
 export interface It {
   (name: string, handler: TestFn): void | Promise<void>,
   only: (name: string, handler: TestFn) => void | Promise<void>,

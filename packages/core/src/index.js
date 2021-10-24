@@ -10,16 +10,19 @@ globalThis.QUEUE = [];
  * @typedef {import('../types').TestFn} TestFn
  * @typedef {import('../types').Describe} Describe
  * @typedef {import('../types').Handler} Handler
- * @typedef {import('../types').Setup} Setup
  */
 
 /**
- * Creates the suite, and related functions for a suite
- * @param {Partial<Suite>} options
- * @return {Setup} setup
+ * @param {string} name 
+ * @param {Handler} handler 
+ * @param {{
+ *  suiteOnly?: boolean,
+ *  skip?: boolean
+ * }} options 
  */
-function setup(options) {
-  const suite = { tests:[], suiteOnly: false, only: [], ...options };
+function createSuite(name, handler, options = {}) {
+  /** @type {Suite} */
+  const suite = { name, tests:[], suiteOnly: false, only: [], ...options };
 
   const it = (name, handler) => {
     suite.tests.push({name, handler});
@@ -32,26 +35,22 @@ function setup(options) {
   const after = handler => { suite.after = handler; }
   const afterEach = handler => { suite.afterEach = handler; }
 
-  return { suite, it, before, beforeEach, after, afterEach };
-}
-
-function createDescribe(name, handler, options = {}) {
-  const {suite, it, before, beforeEach, after, afterEach } = setup({name, ...options});
   QUEUE.push(suite);
   handler({it, before, beforeEach, after, afterEach});
 }
 
 /** @type {Describe} describe */
-export const describe = (name, handler) => createDescribe(name, handler);
-describe.only = (name, handler) => createDescribe(name, handler, {suiteOnly: true})
-describe.skip = (name, handler) => createDescribe(name, handler, {skip: true})
+export const describe = (name, handler) => { createSuite(name, handler) };
+describe.only = (name, handler) => { createSuite(name, handler, {suiteOnly: true}) };
+describe.skip = (name, handler) => { createSuite(name, handler, {skip: true}) };
 
 async function withErrorHandling(type = '', handler) {
   try {
     await handler?.();
   } catch (e) {
-    console.error(`Error in hook "${type}":`);
-    throw new Error(e);
+    const err = new Error(e);
+    err.message = `in hook "${type}"\n\n${e.message}`;
+    throw err;
   }
 }
 
@@ -95,12 +94,11 @@ async function run(suite, {renderer} = {}) {
       error: false  
     }
 
-    const time = timer();
     await withErrorHandling('beforeEach', beforeEach);
     
+    const time = timer();
     try {
       const { skipped } = await test.handler() || {};
-      testResult.duration = time();
       testResult.skipped = !!skipped;
       testResult.passed = !skipped;
 
@@ -108,10 +106,11 @@ async function run(suite, {renderer} = {}) {
     } catch (err) {
       testSuiteResult.failed++;
       testResult.passed = false;
-      testResult.duration = time();
       
       testResult.error = {expected: err?.expects, ...err, message: err.message, stack: err.stack};
     } finally {
+      testResult.duration = time();
+
       testSuiteResult.total++;
       renderer?.renderTest?.(testResult);
       testSuiteResult.tests.push(testResult);
